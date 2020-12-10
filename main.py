@@ -10,11 +10,13 @@ res2 = 0
 field = pygame.image.load("assets/field.png")
 chicken1 = pygame.image.load("assets/chicken.png")
 chicken1_y = 270
+chicken1_x = 30
 chicken1_moveup = False
 chicken1_movedown = False
 
 chicken2 = pygame.image.load("assets/chicken2.png")
 chicken2_y = 270
+chicken2_x = 910
 chicken2_moveup = False
 chicken2_movedown = False
 
@@ -61,11 +63,14 @@ def move_egg():
     if egg2_x < 90:
         if chicken1_y <= egg2_y + 124:
             if chicken1_y + 101 >= egg2_y:
-                ball_dir *= -1
+                if chicken1_x >= egg2_x:
+                    ball_dir *= -1
+
     if egg2_x > 845:
         if chicken2_y <= egg2_y + 124:
             if chicken2_y + 101 >= egg2_y:
-                ball_dir *= -1
+                if chicken2_x <= egg2_x:
+                    ball_dir *= -1
 
     if egg2_y >= 555:
         ball_dir_y *= -1
@@ -74,8 +79,8 @@ def move_egg():
 
 def draw():
     window.blit(field, (0, 0))
-    window.blit(chicken1, (30, chicken1_y))
-    window.blit(chicken2, (910, chicken2_y))
+    window.blit(chicken1, (chicken1_x, chicken1_y))
+    window.blit(chicken2, (chicken2_x, chicken2_y))
     window.blit(egg2, (egg2_x, egg2_y))
 
 def placar():
